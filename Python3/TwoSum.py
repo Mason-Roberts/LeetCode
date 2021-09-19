@@ -25,28 +25,29 @@ def main():
 
     print(twoSum(nums, target))
 
-
-# First attempts at a version that is less than O(n^2) runtime
-# def twoSum(nums: List[int], target: int) -> List[int]:
-#     possible_nums = []
-#     index = 0
-#     for num in nums:
-#         if(num <= target):
-#             possible_nums.append((num, index))
-#         index += 1
-#     possible_nums.sort()
-#     return possible_nums
-
-
 def twoSum(nums: List[int], target: int) -> List[int]:
     '''
-    Brute force method
+    A solution that is less than O(n^2) by utilizing a dictionary to map out the
+    needed values
     '''
+    differences = {}
     nums_size = len(nums)
     for x in range(nums_size):
-        for y in range(nums_size):
-            sum = nums[x] + nums[y]
-            if((sum == target) and x != y):
-                return [x, y]      
+        if nums[x] in differences:
+            return [differences[nums[x]], x]
+        differences[target - nums[x]] = x
+
+
+
+# def twoSum(nums: List[int], target: int) -> List[int]:
+#     '''
+#     Brute force method
+#     '''
+#     nums_size = len(nums)
+#     for x in range(nums_size):
+#         for y in range(nums_size):
+#             sum = nums[x] + nums[y]
+#             if((sum == target) and x != y):
+#                 return [x, y]      
 
 main()
